@@ -1,5 +1,5 @@
 <?php
-class ENT_Profiler_Contents {
+class Entrophy_Profiler_Contents {
 	protected $file;
 	
 	public function __construct($file) {
@@ -8,7 +8,7 @@ class ENT_Profiler_Contents {
 	
 	public function getTotalDuration() {
 		$duration = 0;
-		foreach (ENT_Profiler::getSteps() as $step) {
+		foreach (Entrophy_Profiler::getSteps() as $step) {
 			$duration += $step->getDuration();
 		}
 		
@@ -16,16 +16,16 @@ class ENT_Profiler_Contents {
 	}
 	
 	public function getFirstStart() {
-		$steps = ENT_Profiler::getSteps();
+		$steps = Entrophy_Profiler::getSteps();
 		return $steps[0]->getStart();
 	}
 	
 	public function displayStep($step) {
-		$view = new ENT_Profiler_Contents_Step('template/contents/step.phtml', $step);
+		$view = new Entrophy_Profiler_Contents_Step('template/contents/step.phtml', $step);
 		return $view->render();
 	}
 	public function displayQuery($step) { 
-		$view = new ENT_Profiler_Contents_Query('template/contents/query.phtml', $step);
+		$view = new Entrophy_Profiler_Contents_Query('template/contents/query.phtml', $step);
 		return $view->render();
 	}
 	

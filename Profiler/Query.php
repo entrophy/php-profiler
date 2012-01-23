@@ -1,5 +1,5 @@
 <?php
-class ENT_Profiler_Query {
+class Entrophy_Profiler_Query {
 	private $name;
 	private $step;
 	private $start = null;
