@@ -1,5 +1,14 @@
 <?php
-require_once('Profiler/Step.php');
+function ENT_Profiler_Autoload($class) {
+	if (strpos($class, 'Entrophy_Profiler_') === 0) {
+		if (class_exists($class, false) || interface_exists($class, false)) {
+			return;
+		}
+		
+		echo $class;
+	}
+}
+spl_autoload_register('Entrophy_Profiler_Autoload');
 class Entrophy_Profiler {
 	private static $running = false;
 	private static $current_step = null;
