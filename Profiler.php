@@ -1,23 +1,24 @@
 <?php
-function ENT_Profiler_Autoload($class) {
-	if (strpos($class, 'Entrophy_Profiler_') === 0) {
-		if (class_exists($class, false) || interface_exists($class, false)) {
-			return;
-		}
-		
-		echo $class;
-	}
-}
-spl_autoload_register('Entrophy_Profiler_Autoload');
+spl_autoload_register(array('Entrophy_Profiler', 'autoload'));
 class Entrophy_Profiler {
 	private static $running = false;
 	private static $current_step = null;
 	private static $current_query = null;
 	private static $steps;
 	private static $queries;
-	private static $step_id = 0;
-	
+	private static $step_id = 0;	
 	public static $render = false;
+	
+	public static function autoload($class) {
+		if (strpos($class, 'Entrophy_Profiler_') === 0) {
+			if (class_exists($class, false) || interface_exists($class, false)) {
+				return;
+			}
+		
+			$file = str_replace(array('_', 'Entrophy/'), array('/', ''), $class).'.php';
+			include $file;
+		}
+	}
 	 
 	public static function getSteps() {
 		return self::$steps;
